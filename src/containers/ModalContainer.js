@@ -24,11 +24,11 @@ class ModalContainer extends Component{
                   <label htmlFor="inputPassword">Password</label>
                   <input type="password" className="form-control" id="inputPassword" placeholder="Password" onInput={this.props.handlePasswordInput}/>
                 </div>
-                <button type="submit" className="btn btn-default">Submit</button>
+                <button type="submit" className="btn btn-default ">Submit</button>
               </form>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" className="btn btn-default" data-dismiss="modal" id="submitsignin">Close</button>
             </div>
         </div>
       </div>
@@ -57,7 +57,7 @@ class ModalContainer extends Component{
             </form>
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" className="btn btn-default" data-dismiss="modal" id="submitsignup" >Close</button>
           </div>
         </div>
       </div>

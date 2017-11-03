@@ -5,6 +5,7 @@ import {Link} from 'react-router';
 import HeaderContainer from './containers/headerContainer'
 import ModalContainer from './containers/ModalContainer'
 import ProfileContainer from './containers/ProfileContainer'
+import HomeContainer from './containers/HomeContainer'
 import AuthModel from './models/AuthModel'
 
 class App extends Component {
@@ -38,7 +39,7 @@ class App extends Component {
         console.log(res)
         if(res.data.username === authData.username){
           this.setState({
-            isAuthed:true, 
+            isAuthed:true,
             password:'',
             _userId: res.data._id
           })
@@ -47,6 +48,9 @@ class App extends Component {
         }
         console.log(this.state)
       })
+      document.getElementById('inputPassword').value = ''
+      document.getElementById('inputUsername').value = ''
+      document.getElementById('submitsignin').click()
   }
   handleSignupSubmit(event){
     event.preventDefault()
@@ -64,6 +68,9 @@ class App extends Component {
         }
         console.log(this.state)
       })
+    document.getElementById('inputUsernameSignUp').value = ''
+    document.getElementById('inputPasswordSignUp').value = ''
+    document.getElementById('submitsignup').click()
   }
   handleLogoutSubmit(event){
     event.preventDefault()
@@ -88,9 +95,8 @@ class App extends Component {
             isAuthed={this.state.isAuthed}
             handleLogoutSubmit={this.handleLogoutSubmit.bind(this)}
             />
-            {this.state.isAuthed===true ? <ProfileContainer /> : console.log('Not login')}
           <main>
-            <Router isAuthed={this.state.isAuthed} routes = {routes} history={browserHistory}/>
+            {this.state.isAuthed===true ? <ProfileContainer /> : <HomeContainer />}
           </main>
           <ModalContainer
             handleLoginSubmit={this.handleLoginSubmit.bind(this)}
