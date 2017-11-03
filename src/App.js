@@ -6,7 +6,9 @@ import HeaderContainer from './containers/headerContainer'
 import ModalContainer from './containers/ModalContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import HomeContainer from './containers/HomeContainer'
+import CitiesContainer from './containers/CitiesContainer'
 import AuthModel from './models/AuthModel'
+
 
 class App extends Component {
   constructor(props){
@@ -15,9 +17,12 @@ class App extends Component {
       _userId: '',
       username: '',
       password: '',
-      isAuthed: false
+      isAuthed: false,
+      changepagen:false
     }
   }
+
+
   handleUsernameInput(event){
     event.preventDefault()
     this.setState({username: event.target.value})
@@ -25,6 +30,10 @@ class App extends Component {
   handlePasswordInput(event){
     event.preventDefault()
     this.setState({password: event.target.value})
+  }
+  changepage(event) {
+    event.preventDefault()
+    this.setState({changepagen:true})
   }
 
   handleLoginSubmit(event){
@@ -43,6 +52,7 @@ class App extends Component {
             password:'',
             _userId: res.data._id
           })
+          browserHistory.push('/profile')
         }else if(!res){
           this.setState({isAuthed:false})
         }
@@ -82,12 +92,26 @@ class App extends Component {
           this.setState({
             username: '',
             password: '',
-            isAuthed: false
+            isAuthed: false,
+            changepagen: false
+
           })
         }
       })
   }
   render() {
+    let profile;
+    let home;
+    let cities;
+    let sherwin;
+    if (this.state.isAuthed && this.state.changepagen){
+      sherwin = <CitiesContainer />
+    }
+    else if(this.state.isAuthed){
+      sherwin = <ProfileContainer changepage={this.changepage.bind(this)}/>
+    }else if (!this.state.isAuthed) {
+      sherwin = <HomeContainer />
+}
     return (
       <div className="App">
         <div className='container'>
@@ -96,7 +120,7 @@ class App extends Component {
             handleLogoutSubmit={this.handleLogoutSubmit.bind(this)}
             />
           <main>
-            {this.state.isAuthed===true ? <ProfileContainer /> : <HomeContainer />}
+            {sherwin}
           </main>
           <ModalContainer
             handleLoginSubmit={this.handleLoginSubmit.bind(this)}
