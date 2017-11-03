@@ -3,10 +3,13 @@ import editicon from '../images/editicon.png'
 import searchButton from '../images/searchicon.png'
 import personalIcon from '../images/icon.jpg'
 import UserImgUpload from '../components/UserImgUpload.js'
+import CitiesContainer from '../containers/CitiesContainer'
+import {Link} from 'react-router'
 
 
 class ProfileContainer extends Component{
   render() {
+    console.log("changepage" + this.props.changepage);
     return(
     <div>
     <div className="search">
@@ -39,6 +42,7 @@ class ProfileContainer extends Component{
     </div>
 
     <div className="posts">
+      <button className="btn btn-lg btn3d" type="button" id="changetocitypage" onClick={this.props.changepage}></button>
       <h1>Posts</h1>
 
       <div className="post">

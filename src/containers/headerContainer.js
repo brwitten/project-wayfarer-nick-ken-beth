@@ -32,7 +32,7 @@ class HeaderContainer extends Component{
 					</div>
 					<div className="fix"></div>
 				</header>
-			)	
+			)
 		}
 	}
 }
